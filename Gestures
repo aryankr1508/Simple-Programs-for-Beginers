@@ -1,0 +1,77 @@
+package com.example.gestures;
+import androidx.appcompat.app.AppCompatActivity;
+import android.os.Bundle;
+import android.view.GestureDetector;
+import android.view.MotionEvent;
+import android.widget.Toast;
+public class MainActivity extends AppCompatActivity implements
+GestureDetector.OnDoubleTapListener, GestureDetector.OnGestureListener {
+ GestureDetector gd;
+ protected void onCreate(Bundle savedInstanceState) {
+ super.onCreate(savedInstanceState);
+ setContentView(R.layout.activity_main);
+ gd=new GestureDetector(this,this);
+ gd.setOnDoubleTapListener(this);
+ }
+ boolean OnTouchEvent(MotionEvent motionEvent)
+ {
+ gd.onTouchEvent(motionEvent);
+ return super.onTouchEvent(motionEvent);
+ }
+ @Override
+ public boolean onSingleTapConfirmed(MotionEvent motionEvent) {
+ Toast.makeText(getApplicationContext(), "single click
+occured",Toast.LENGTH_LONG).show();
+ return false;
+ }
+ @Override
+ public boolean onDoubleTap(MotionEvent motionEvent) {
+ Toast.makeText(getApplicationContext(),"Double click
+occured",Toast.LENGTH_LONG).show();
+ return false;
+ }
+ @Override
+ public boolean onDoubleTapEvent(MotionEvent motionEvent) {
+ return false;
+ }
+ @Override
+ public boolean onDown(MotionEvent motionEvent) {
+ return false;
+ }
+ @Override
+ public void onShowPress(MotionEvent motionEvent) {
+ }
+ @Override
+ public boolean onSingleTapUp(MotionEvent motionEvent) {
+ return false;
+ }
+ @Override
+ public boolean onScroll(MotionEvent motionEvent, MotionEvent motionEvent1,
+float v, float v1) {
+ return false;
+ }
+ @Override
+ public void onLongPress(MotionEvent motionEvent) {
+ }
+ @Override
+ public boolean onFling(MotionEvent motionEvent, MotionEvent motionEvent1,
+float v, float v1) {
+ if(motionEvent1.getX()-motionEvent.getX()>50) {
+ Toast.makeText(getApplicationContext(), "Right swipe",
+Toast.LENGTH_LONG).show();
+ }
+ if (motionEvent.getX()-motionEvent1.getX()>50) {
+ Toast.makeText(getApplicationContext(),"Left swipe",
+Toast.LENGTH_LONG).show();
+ }
+ if (motionEvent1.getY()-motionEvent.getY()>50) {
+ Toast.makeText(getApplicationContext(),"Down
+swipe",Toast.LENGTH_LONG).show();
+ }
+ if (motionEvent.getY()-motionEvent1.getY()>50) {
+ Toast.makeText(getApplicationContext(),"Up swipe",
+Toast.LENGTH_LONG).show();
+ }
+ return false;
+ }
+}
